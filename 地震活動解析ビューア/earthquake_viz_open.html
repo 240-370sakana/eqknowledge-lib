@@ -32,12 +32,17 @@
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
+  html { overflow-x: hidden; width: 100%; }
+
   body {
     background: var(--bg);
     color: var(--text);
     font-family: var(--sans);
     font-weight: 300;
     min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   /* ── Header ── */
@@ -45,10 +50,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 32px;
+    padding: 14px 20px;
     border-bottom: 1px solid var(--border);
     background: linear-gradient(90deg, #0d1420 0%, #0a1830 100%);
     position: sticky; top: 0; z-index: 1000;
+    width: 100%; box-sizing: border-box; max-width: 100%;
   }
   .logo {
     font-family: var(--mono);
@@ -140,23 +146,95 @@
   }
   .btn-primary:hover { opacity: 0.85; }
 
+
+  /* ── Tabs ── */
+  .tab-bar {
+    display: flex; gap: 0; margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    padding: 10px 24px; background: transparent;
+    border: none; border-bottom: 2px solid transparent;
+    color: var(--text-dim); font-family: var(--mono);
+    font-size: 0.78rem; letter-spacing: 2px; cursor: pointer;
+    transition: all 0.2s; text-transform: uppercase;
+  }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:hover { color: var(--text); }
+  .tab-pane { display: none; width: 100%; }
+  .tab-pane.active { display: block; width: 100%; }
+
+  /* ── ETAS ── */
+  .etas-load-box {
+    border: 1px dashed var(--accent3); border-radius: 4px;
+    padding: 48px 40px; text-align: center;
+    background: rgba(255,165,2,0.03); cursor: pointer;
+    transition: all 0.2s; max-width: 600px; margin: 60px auto;
+    width: 100%; box-sizing: border-box;
+  }
+  .etas-load-box:hover { background: rgba(255,165,2,0.07); }
+  .param-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px; margin-bottom: 20px;
+  }
+  .param-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 4px; padding: 20px 14px; text-align: center;
+    transition: border-color 0.2s;
+  }
+  .param-card:hover { border-color: var(--accent3); }
+  .param-name  { font-family: var(--mono); color: var(--accent3); font-size: 1.2rem; margin-bottom: 8px; }
+  .param-value { font-family: var(--mono); color: var(--text); font-size: 1.5rem; font-weight: 600; }
+  .param-ci    { font-family: var(--mono); color: var(--text-dim); font-size: 0.68rem; margin-top: 6px; }
+  .aic-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.85rem; }
+  .aic-table th { color: var(--text-dim); padding: 11px 16px; text-align: left; font-size: 0.68rem; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+  .aic-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); }
+  .ks-badge { display: inline-block; padding: 3px 12px; border-radius: 2px; font-family: var(--mono); font-size: 0.75rem; font-weight: 600; }
+  .sim-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); }
+  .sim-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
   /* ── Dashboard ── */
-  #dashboard { display: none; padding: 24px 28px; }
+  #dashboard { display: none; padding: 20px 10%; width: 100%; max-width: 100%; box-sizing: border-box; }
+  .etas-inner { padding: 20px 10%; width: 100%; box-sizing: border-box; }
   #dashboard.visible { display: block; }
 
   /* Filter bar */
   #filter-bar {
-    display: flex; gap: 16px; flex-wrap: wrap;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 4px; padding: 16px 20px; margin-bottom: 24px;
-    align-items: flex-end;
+    border-radius: 4px; padding: 14px 20px; margin-bottom: 24px;
+    width: 100%; box-sizing: border-box;
   }
-  .filter-group { display: flex; flex-direction: column; gap: 5px; }
-  .filter-label { color: var(--text-dim); font-family: var(--mono); font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; }
+  .filter-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px 0;
+    align-items: start;
+  }
+  .filter-section {
+    display: flex; flex-direction: row; align-items: flex-end; gap: 10px;
+    padding: 6px 16px 6px 0;
+    border-right: 1px solid var(--border);
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  .filter-section:last-child { border-right: none; }
+  .filter-section-label {
+    display: block; width: 100%; color: var(--accent3);
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 1px;
+    margin-bottom: 6px; text-transform: uppercase;
+    flex-basis: 100%;
+  }
+  .filter-section--btns {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    gap: 8px; padding-left: 16px; border-right: none;
+  }
+  .filter-group { display: flex; flex-direction: column; gap: 4px; }
+  .filter-label { color: var(--text-dim); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 1px; text-transform: uppercase; }
   .filter-group input, .filter-group select {
     background: var(--bg); border: 1px solid var(--border); color: var(--text);
-    padding: 6px 10px; border-radius: 3px; font-family: var(--mono); font-size: 0.8rem;
-    outline: none; width: 140px;
+    padding: 5px 8px; border-radius: 3px; font-family: var(--mono); font-size: 0.78rem;
+    outline: none; width: 100%; max-width: 120px; box-sizing: border-box;
   }
   .filter-group input:focus, .filter-group select:focus { border-color: var(--accent); }
   #apply-filter {
@@ -173,33 +251,46 @@
     transition: all 0.2s; align-self: flex-end;
   }
   #reset-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  #csv-export-btn {
+    margin-left: 16px;
+    padding: 4px 14px; background: transparent;
+    border: 1px solid #2ed573; color: #2ed573;
+    border-radius: 3px; cursor: pointer;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  #csv-export-btn:hover { background: rgba(46,213,115,0.12); }
 
   /* Grid */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-  .full-width { margin-bottom: 20px; }
+  .full-width { margin-bottom: 24px; width: 100%; box-sizing: border-box; }
 
   .panel {
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 4px; overflow: hidden;
+    border-radius: 4px; overflow: hidden; width: 100%; box-sizing: border-box;
   }
   .panel-header {
     padding: 12px 18px; border-bottom: 1px solid var(--border);
     display: flex; align-items: center; gap: 10px;
   }
   .panel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-  .panel-title { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
-  .panel-body { padding: 16px; }
+  .panel-title { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+  .panel-body { padding: 20px; width: 100%; box-sizing: border-box; }
+  .panel-body canvas { display: block; width: 100% !important; }
 
   /* Map */
-  #map { height: 440px; }
+  #map { height: 55vh; min-height: 320px; width: 100%; }
 
   /* Charts */
-  .chart-wrap { position: relative; height: 280px; }
+  .chart-wrap { position: relative; height: 52vh; min-height: 330px; width: 100%; }
+  .chart-wrap-wide { position: relative; height: 60vh; min-height: 390px; width: 100%; }
+  .chart-wrap-timeseries { position: relative; height: 60vh; min-height: 390px; width: 100%; }
+  .panel-body--flush { padding: 0 !important; }
 
   /* Table */
   #table-wrap {
-    max-height: 320px; overflow-y: auto;
+    max-height: 45vh; overflow-y: auto;
   }
   #table-wrap::-webkit-scrollbar { width: 4px; }
   #table-wrap::-webkit-scrollbar-track { background: var(--bg); }
@@ -281,30 +372,79 @@
 
 <!-- ── Dashboard ── -->
 <div id="dashboard">
+
+  <!-- Tab Bar -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('viz')">可視化</button>
+    <button class="tab-btn" onclick="switchTab('etas')">ETAS解析</button>
+  </div>
+
+  <!-- TAB: 可視化 -->
+  <div class="tab-pane active" id="tab-viz">
+
   <!-- Filter Bar -->
   <div id="filter-bar">
-    <div class="filter-group">
-      <span class="filter-label">開始日</span>
-      <input type="date" id="f-date-start">
+    <div class="filter-row">
+      <div class="filter-section">
+        <span class="filter-section-label">▸ 期間</span>
+        <div class="filter-group">
+          <span class="filter-label">開始日</span>
+          <input type="date" id="f-date-start">
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">終了日</span>
+          <input type="date" id="f-date-end">
+        </div>
+      </div>
+      <div class="filter-section">
+        <span class="filter-section-label">▸ マグニチュード</span>
+        <div class="filter-group">
+          <span class="filter-label">最小 M</span>
+          <input type="number" id="f-mag-min" step="0.1" min="0" placeholder="0.0">
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">最大 M</span>
+          <input type="number" id="f-mag-max" step="0.1" min="0" placeholder="9.9">
+        </div>
+      </div>
+      <div class="filter-section">
+        <span class="filter-section-label">▸ 深さ (km)</span>
+        <div class="filter-group">
+          <span class="filter-label">最小</span>
+          <input type="number" id="f-depth-min" step="1" min="0" placeholder="0">
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">最大</span>
+          <input type="number" id="f-depth-max" step="1" min="0" placeholder="700">
+        </div>
+      </div>
+      <div class="filter-section">
+        <span class="filter-section-label">▸ 緯度 (°N)</span>
+        <div class="filter-group">
+          <span class="filter-label">最小</span>
+          <input type="number" id="f-lat-min" step="0.1" placeholder="-90">
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">最大</span>
+          <input type="number" id="f-lat-max" step="0.1" placeholder="90">
+        </div>
+      </div>
+      <div class="filter-section">
+        <span class="filter-section-label">▸ 経度 (°E)</span>
+        <div class="filter-group">
+          <span class="filter-label">最小</span>
+          <input type="number" id="f-lon-min" step="0.1" placeholder="-180">
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">最大</span>
+          <input type="number" id="f-lon-max" step="0.1" placeholder="180">
+        </div>
+      </div>
+      <div class="filter-section filter-section--btns">
+        <button id="apply-filter">APPLY</button>
+        <button id="reset-btn">RESET</button>
+      </div>
     </div>
-    <div class="filter-group">
-      <span class="filter-label">終了日</span>
-      <input type="date" id="f-date-end">
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">最小マグニチュード</span>
-      <input type="number" id="f-mag-min" step="0.1" min="0" placeholder="0.0">
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">最大マグニチュード</span>
-      <input type="number" id="f-mag-max" step="0.1" min="0" placeholder="9.9">
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">最大深さ (km)</span>
-      <input type="number" id="f-depth-max" step="10" min="0" placeholder="700">
-    </div>
-    <button id="apply-filter">APPLY</button>
-    <button id="reset-btn">RESET</button>
   </div>
 
   <!-- Row1: Map (full) -->
@@ -319,38 +459,127 @@
     <div id="map"></div>
   </div>
 
-  <!-- Row2: Time series + M-Depth scatter -->
-  <div class="grid-2">
-    <div class="panel">
-      <div class="panel-header"><div class="panel-dot" style="background:var(--accent3)"></div><span class="panel-title">マグニチュード時系列</span></div>
-      <div class="panel-body"><div class="chart-wrap"><canvas id="chart-timeseries"></canvas></div></div>
-    </div>
-    <div class="panel">
-      <div class="panel-header"><div class="panel-dot" style="background:#a55eea"></div><span class="panel-title">深さ vs マグニチュード</span></div>
-      <div class="panel-body"><div class="chart-wrap"><canvas id="chart-scatter"></canvas></div></div>
-    </div>
+  <!-- Row2: Time series (full width) -->
+  <div class="full-width panel">
+    <div class="panel-header"><div class="panel-dot" style="background:var(--accent3)"></div><span class="panel-title">マグニチュード時系列</span></div>
+    <div class="panel-body"><div class="chart-wrap-timeseries"><canvas id="chart-timeseries"></canvas></div></div>
   </div>
 
-  <!-- Row3: Frequency + Mag histogram -->
-  <div class="grid-2">
-    <div class="panel">
-      <div class="panel-header"><div class="panel-dot" style="background:var(--accent2)"></div><span class="panel-title">発生頻度（日別）</span></div>
-      <div class="panel-body"><div class="chart-wrap"><canvas id="chart-freq"></canvas></div></div>
-    </div>
-    <div class="panel">
-      <div class="panel-header"><div class="panel-dot" style="background:#2ed573"></div><span class="panel-title">マグニチュード頻度分布</span></div>
-      <div class="panel-body"><div class="chart-wrap"><canvas id="chart-maghist"></canvas></div></div>
-    </div>
+  <!-- Row3: M-Depth scatter (full width) -->
+  <div class="full-width panel">
+    <div class="panel-header"><div class="panel-dot" style="background:#a55eea"></div><span class="panel-title">深さ vs マグニチュード</span></div>
+    <div class="panel-body"><div class="chart-wrap-wide"><canvas id="chart-scatter"></canvas></div></div>
+  </div>
+
+  <!-- Row4: Frequency (full width) -->
+  <div class="full-width panel">
+    <div class="panel-header"><div class="panel-dot" style="background:var(--accent2)"></div><span class="panel-title">発生頻度（日別）</span></div>
+    <div class="panel-body"><div class="chart-wrap-wide"><canvas id="chart-freq"></canvas></div></div>
+  </div>
+
+  <!-- Row5: Mag histogram (full width) -->
+  <div class="full-width panel">
+    <div class="panel-header"><div class="panel-dot" style="background:#2ed573"></div><span class="panel-title">マグニチュード頻度分布</span></div>
+    <div class="panel-body"><div class="chart-wrap-wide"><canvas id="chart-maghist"></canvas></div></div>
   </div>
 
   <!-- Row4: Table -->
   <div class="panel full-width">
-    <div class="panel-header"><div class="panel-dot" style="background:var(--text-dim)"></div><span class="panel-title">データテーブル</span><span id="table-count" style="margin-left:auto;color:var(--text-dim);font-size:0.7rem;font-family:var(--mono)"></span></div>
+    <div class="panel-header"><div class="panel-dot" style="background:var(--text-dim)"></div><span class="panel-title">データテーブル</span><span id="table-count" style="margin-left:auto;color:var(--text-dim);font-size:0.7rem;font-family:var(--mono)"></span><button id="csv-export-btn" onclick="exportCSV()">⬇ CSV出力</button></div>
     <div class="panel-body" style="padding:0">
       <div id="table-wrap"><table id="data-table"><thead id="t-head"></thead><tbody id="t-body"></tbody></table></div>
     </div>
   </div>
 </div>
+
+
+  </div><!-- /tab-viz -->
+
+  <!-- TAB: ETAS解析 -->
+  <div class="tab-pane" id="tab-etas">
+  <div class="etas-inner">
+
+    <!-- JSON読み込み -->
+    <div id="etas-upload-area">
+      <div class="etas-load-box" onclick="document.getElementById('etas-json-input').click()">
+        <div style="font-size:2rem;color:var(--accent3);margin-bottom:12px">⬡</div>
+        <p style="font-size:1rem;font-weight:600;margin-bottom:8px">etas_output.json を読み込む</p>
+        <p style="color:var(--text-dim);font-size:0.82rem">
+          Python解析後に生成された <code style="color:var(--accent3)">etas_output.json</code> をここに読み込んでください
+        </p>
+        <input type="file" id="etas-json-input" accept=".json" style="display:none">
+      </div>
+      <p style="text-align:center;color:var(--text-dim);font-family:var(--mono);font-size:0.75rem;margin-top:16px">
+        実行方法: <code style="color:var(--accent)">python etas_analysis.py data.csv --lat 緯度列 --lon 経度列</code>
+      </p>
+    </div>
+
+    <!-- 解析結果 -->
+    <div id="etas-results" style="display:none">
+
+      <!-- メタ情報 -->
+      <div class="panel full-width" style="margin-bottom:24px">
+        <div class="panel-header"><div class="panel-dot" style="background:var(--accent3)"></div><span class="panel-title">解析メタデータ</span></div>
+        <div class="panel-body" id="etas-meta" style="font-family:var(--mono);font-size:0.88rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 32px;"></div>
+      </div>
+
+      <!-- パラメータ推定値 -->
+      <div class="panel full-width" style="margin-bottom:24px">
+        <div class="panel-header"><div class="panel-dot" style="background:var(--accent3)"></div><span class="panel-title">パラメータ推定値（95% CI）</span></div>
+        <div class="panel-body">
+          <div class="param-grid" id="param-grid"></div>
+          <p style="color:var(--text-dim);font-size:0.72rem;font-family:var(--mono)">
+            μ: 背景レート　K: 余震生産性　α: M依存性　c,p: 大森・宇津則パラメータ
+          </p>
+        </div>
+      </div>
+
+      <!-- AIC比較 -->
+      <div style="margin-bottom:24px;">
+        <div class="panel">
+          <div class="panel-header"><div class="panel-dot" style="background:#2ed573"></div><span class="panel-title">AICによるモデル比較</span></div>
+          <div class="panel-body">
+            <table class="aic-table">
+              <thead><tr><th>モデル</th><th>パラメータ数</th><th>log L</th><th>AIC</th></tr></thead>
+              <tbody id="aic-tbody"></tbody>
+            </table>
+            <p id="aic-verdict" style="margin-top:14px;font-family:var(--mono);font-size:0.8rem"></p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><div class="panel-dot" style="background:#a55eea"></div><span class="panel-title">残差解析（KSテスト）</span></div>
+          <div class="panel-body">
+            <div id="ks-result" style="font-family:var(--mono);font-size:0.88rem;margin-bottom:16px"></div>
+            <div class="chart-wrap"><canvas id="chart-ks"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- λ(t) グラフ -->
+      <div class="panel full-width" style="margin-bottom:24px">
+        <div class="panel-header"><div class="panel-dot" style="background:var(--accent)"></div><span class="panel-title">強度関数 λ(t) と観測イベント</span></div>
+        <div class="panel-body"><div class="chart-wrap-wide"><canvas id="chart-lambda"></canvas></div></div>
+      </div>
+
+      <!-- シミュレーション -->
+      <div class="panel full-width" style="margin-bottom:24px">
+        <div class="panel-header"><div class="panel-dot" style="background:var(--accent2)"></div><span class="panel-title">ETASシミュレーション（予測）</span></div>
+        <div class="panel-body">
+          <div id="sim-summary" style="font-family:var(--mono);font-size:0.82rem;margin-bottom:12px;color:var(--text-dim)"></div>
+          <div class="chart-wrap-wide"><canvas id="chart-sim"></canvas></div>
+        </div>
+      </div>
+
+      <!-- 空間パラメータ -->
+      <div class="panel full-width" id="spatial-panel" style="display:none;margin-bottom:24px">
+        <div class="panel-header"><div class="panel-dot" style="background:#ff6348"></div><span class="panel-title">空間ETASパラメータ</span></div>
+        <div class="panel-body" id="spatial-content" style="font-family:var(--mono);font-size:0.85rem"></div>
+      </div>
+
+    </div><!-- /etas-results -->
+  </div><!-- /etas-inner -->
+  </div><!-- /tab-etas -->
+
 
 <!-- Notification -->
 <div id="notif"></div>
@@ -495,9 +724,14 @@ function initFilterDefaults() {
   const toISO = d => d.toISOString().slice(0, 10);
   document.getElementById('f-date-start').value = toISO(new Date(Math.min(...dates)));
   document.getElementById('f-date-end').value   = toISO(new Date(Math.max(...dates)));
-  document.getElementById('f-mag-min').value = '';
-  document.getElementById('f-mag-max').value = '';
+  document.getElementById('f-mag-min').value   = '';
+  document.getElementById('f-mag-max').value   = '';
+  document.getElementById('f-depth-min').value = '';
   document.getElementById('f-depth-max').value = '';
+  document.getElementById('f-lat-min').value   = '';
+  document.getElementById('f-lat-max').value   = '';
+  document.getElementById('f-lon-min').value   = '';
+  document.getElementById('f-lon-max').value   = '';
 }
 
 document.getElementById('apply-filter').addEventListener('click', applyFilter);
@@ -508,15 +742,26 @@ document.getElementById('reset-btn').addEventListener('click', () => {
 function applyFilter() {
   const ds = document.getElementById('f-date-start').value;
   const de = document.getElementById('f-date-end').value;
-  const mmn = parseFloat(document.getElementById('f-mag-min').value) || -Infinity;
-  const mmx = parseFloat(document.getElementById('f-mag-max').value) || Infinity;
-  const dmax = parseFloat(document.getElementById('f-depth-max').value) || Infinity;
+  const mmn   = parseFloat(document.getElementById('f-mag-min').value);
+  const mmx   = parseFloat(document.getElementById('f-mag-max').value);
+  const dmin  = parseFloat(document.getElementById('f-depth-min').value);
+  const dmax  = parseFloat(document.getElementById('f-depth-max').value);
+  const latmn = parseFloat(document.getElementById('f-lat-min').value);
+  const latmx = parseFloat(document.getElementById('f-lat-max').value);
+  const lonmn = parseFloat(document.getElementById('f-lon-min').value);
+  const lonmx = parseFloat(document.getElementById('f-lon-max').value);
   const start = ds ? new Date(ds) : new Date(0);
   const end   = de ? new Date(de + 'T23:59:59') : new Date(9e15);
   filteredData = rawData.filter(d =>
     d.dt >= start && d.dt <= end &&
-    d.mag >= mmn && d.mag <= mmx &&
-    d.depth <= dmax
+    (isNaN(mmn)   || d.mag   >= mmn)   &&
+    (isNaN(mmx)   || d.mag   <= mmx)   &&
+    (isNaN(dmin)  || d.depth >= dmin)  &&
+    (isNaN(dmax)  || d.depth <= dmax)  &&
+    (isNaN(latmn) || d.lat   >= latmn) &&
+    (isNaN(latmx) || d.lat   <= latmx) &&
+    (isNaN(lonmn) || d.lon   >= lonmn) &&
+    (isNaN(lonmx) || d.lon   <= lonmx)
   );
   updateAll();
   notify(`フィルタ適用: ${filteredData.length} 件`, 'success');
@@ -616,9 +861,12 @@ const chartDefaults = {
 function makeChart(id, config) {
   if (charts[id]) { charts[id].destroy(); charts[id] = null; }
   const canvas = document.getElementById(id);
-  // Chart.jsの内部登録からも確実に削除
   const existing = Chart.getChart(canvas);
   if (existing) existing.destroy();
+  // responsive設定を強制
+  config.options = config.options || {};
+  config.options.responsive = true;
+  config.options.maintainAspectRatio = false;
   charts[id] = new Chart(canvas, config);
   return charts[id];
 }
@@ -628,33 +876,113 @@ function makeChart(id, config) {
 ───────────────────────────────────────────── */
 function updateTimeseries() {
   const d = filteredData;
-  const maxLabels = 60;
-  const step = Math.max(1, Math.floor(d.length / maxLabels));
-  const labels = d.map((e, i) => {
-    if (i % step !== 0) return '';
-    const dt = e.dt;
-    return `${dt.getFullYear()}/${String(dt.getMonth()+1).padStart(2,'0')}/${String(dt.getDate()).padStart(2,'0')}`;
-  });
+  if (!d.length) return;
+
+  const tMin = d[0].dt.getTime();
+  const tMax = d[d.length - 1].dt.getTime();
+  const spanDays = (tMax - tMin) / 86400000;
+
+  // 各イベントの X 値 = 開始からの経過日数（実数）
+  const points = d.map(e => ({
+    x: (e.dt.getTime() - tMin) / 86400000,
+    y: e.mag,
+    color: e.mag >= 6.0 ? 'rgba(255,71,87,0.9)'
+         : e.mag >= 5.0 ? 'rgba(255,99,72,0.85)'
+         : e.mag >= 4.0 ? 'rgba(255,165,2,0.8)'
+         : e.mag >= 3.0 ? 'rgba(0,212,255,0.7)'
+         :                'rgba(0,212,255,0.35)',
+    orig: e
+  }));
+
+  // ── X 軸の目盛を時刻ベースで均等生成 ──
+  let tickIntervalDays, minorIntervalDays, fmtTick;
+  if      (spanDays <=   3) { tickIntervalDays = 0.25;  minorIntervalDays = 0.0417; fmtTick = v => { const d=new Date(tMin+v*86400000); return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:00`; }; }
+  else if (spanDays <=   7) { tickIntervalDays = 1;     minorIntervalDays = 0.25;   fmtTick = v => { const d=new Date(tMin+v*86400000); return `${d.getMonth()+1}/${d.getDate()}`; }; }
+  else if (spanDays <=  14) { tickIntervalDays = 1;     minorIntervalDays = 0.5;    fmtTick = v => { const d=new Date(tMin+v*86400000); return `${d.getMonth()+1}/${d.getDate()}`; }; }
+  else if (spanDays <=  60) { tickIntervalDays = 3;     minorIntervalDays = 1;      fmtTick = v => { const d=new Date(tMin+v*86400000); return `${d.getMonth()+1}/${d.getDate()}`; }; }
+  else if (spanDays <= 180) { tickIntervalDays = 7;     minorIntervalDays = 1;      fmtTick = v => { const d=new Date(tMin+v*86400000); return `${d.getMonth()+1}/${d.getDate()}`; }; }
+  else if (spanDays <= 730) { tickIntervalDays = 30;    minorIntervalDays = 7;      fmtTick = v => { const d=new Date(tMin+v*86400000); return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}`; }; }
+  else                      { tickIntervalDays = 90;    minorIntervalDays = 30;     fmtTick = v => { const d=new Date(tMin+v*86400000); return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}`; }; }
+
+  // 縦線＋グリッド線を描画するカスタムプラグイン
+  const vertLinePlugin = {
+    id: 'vertLines_ts',
+    afterDatasetsDraw(chart) {
+      const {ctx, scales: {x, y}, chartArea} = chart;
+      const yBottom = y.getPixelForValue(0);
+      const yTop    = chartArea.top;
+      const minLineW = Math.max(0.5, (chartArea.width / Math.max(points.length, 1)) * 0.7);
+
+      ctx.save();
+
+      // ① イベント縦線
+      points.forEach(p => {
+        const xPx = x.getPixelForValue(p.x);
+        const yPx = y.getPixelForValue(p.y);
+        ctx.beginPath();
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth   = minLineW;
+        ctx.moveTo(xPx, yBottom);
+        ctx.lineTo(xPx, yPx);
+        ctx.stroke();
+      });
+
+      // ② 補助軸（minorInterval ごと、主軸以外）
+      ctx.lineWidth = 0.5;
+      ctx.setLineDash([2, 4]);
+      for (let v = 0; v <= spanDays + minorIntervalDays * 0.5; v += minorIntervalDays) {
+        const isMajor = Math.abs(v % tickIntervalDays) < minorIntervalDays * 0.01
+                     || Math.abs(v % tickIntervalDays - tickIntervalDays) < minorIntervalDays * 0.01;
+        if (isMajor) continue;  // 主軸位置はスキップ
+        ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+        const xPx = x.getPixelForValue(v);
+        ctx.beginPath();
+        ctx.moveTo(xPx, yTop);
+        ctx.lineTo(xPx, yBottom);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+
+      // ③ 主軸（tickInterval ごと、実線）
+      ctx.strokeStyle = 'rgba(0,212,255,0.4)';
+      ctx.lineWidth   = 1;
+      for (let v = 0; v <= spanDays + tickIntervalDays * 0.5; v += tickIntervalDays) {
+        const xPx = x.getPixelForValue(v);
+        ctx.beginPath();
+        ctx.moveTo(xPx, yTop);
+        ctx.lineTo(xPx, yBottom);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+  };
+
   makeChart('chart-timeseries', {
     type: 'scatter',
+    plugins: [vertLinePlugin],
     data: {
       datasets: [{
-        data: d.map((e, i) => ({ x: i, y: e.mag })),
-        pointRadius: d.map(e => Math.max(2, e.mag * 1.5)),
-        pointBackgroundColor: d.map(e => depthColor(e.depth)),
-        pointBorderWidth: 0,
-        pointHoverRadius: 6
+        data: points.map(p => ({ x: p.x, y: p.y })),
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: points.map(p => p.color)
       }]
     },
     options: {
-      ...chartDefaults,
+      responsive: true,
+      maintainAspectRatio: false,
+      color: '#c8d8f0',
       plugins: {
-        ...chartDefaults.plugins,
+        legend: { display: false },
         tooltip: {
-          ...chartDefaults.plugins.tooltip,
+          backgroundColor: '#0d1420', borderColor: '#1a2540', borderWidth: 1,
+          titleColor: '#00d4ff', bodyColor: '#c8d8f0',
+          titleFont: { family: 'Share Tech Mono' }, bodyFont: { family: 'Share Tech Mono' },
           callbacks: {
+            title: () => '',
             label: ctx => {
-              const e = d[ctx.parsed.x];
+              const e = points[ctx.dataIndex]?.orig;
               if (!e) return '';
               return `M${e.mag.toFixed(1)}  ${e.dt.toLocaleString('ja-JP')}  深さ${e.depth}km`;
             }
@@ -663,20 +991,31 @@ function updateTimeseries() {
       },
       scales: {
         x: {
+          type: 'linear',
+          min: 0,
+          max: spanDays,
           ticks: {
             color: '#4a6080',
-            font: { family: 'Share Tech Mono', size: 8 },
+            font: { family: 'Share Tech Mono', size: 9 },
             maxRotation: 45,
-            callback: (val) => labels[val] || ''
+            stepSize: tickIntervalDays,
+            callback: v => fmtTick(v)
           },
-          grid: { color: '#1a2540' }
+          grid: {
+            display: true,
+            drawOnChartArea: true,
+            color: 'rgba(0,212,255,0.2)',
+            lineWidth: 1
+          }
         },
         y: {
+          min: 0,
           title: { display: true, text: 'Magnitude', color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 } },
           ticks: { color: '#4a6080', font: { family: 'Share Tech Mono', size: 10 } },
           grid: { color: '#1a2540' }
         }
-      }
+      },
+      animation: { duration: 200 }
     }
   });
 }
@@ -735,25 +1074,219 @@ function updateFreq() {
    MAG HISTOGRAM
 ───────────────────────────────────────────── */
 function updateMagHist() {
-  const bins = {};
-  const step = 0.5;
-  filteredData.forEach(d => {
-    const b = (Math.floor(d.mag / step) * step).toFixed(1);
-    bins[b] = (bins[b] || 0) + 1;
+  const d = filteredData;
+  if (!d.length) return;
+
+  const step = 0.1;
+  const mags = d.map(e => e.mag);
+  const mMin = Math.floor(Math.min(...mags) / step) * step;
+  const mMax = Math.ceil (Math.max(...mags) / step) * step;
+
+  // ── ビン生成 ──
+  const binEdges = [];
+  for (let m = mMin; m <= mMax + step * 0.5; m = Math.round((m + step) * 10) / 10)
+    binEdges.push(m);
+
+  // n(M): 各ビンの個数
+  const nBin = new Array(binEdges.length).fill(0);
+  mags.forEach(m => {
+    const i = Math.round((m - mMin) / step);
+    if (i >= 0 && i < nBin.length) nBin[i]++;
   });
-  const labels = Object.keys(bins).sort((a,b) => +a - +b);
-  const values = labels.map(k => bins[k]);
+
+  // N(M): 累積（M以上の個数）
+  const nCum = binEdges.map(m => mags.filter(v => v >= m - step * 0.5).length);
+
+  // ── G-R 回帰（最小二乗, log10 N ~ a - b*M）──
+  // Mc 以上で回帰（最大曲率法）
+  const maxIdx = nBin.indexOf(Math.max(...nBin));
+  const mcEst  = binEdges[maxIdx];
+  const fitIdx = binEdges.map((m, i) => i).filter(i => binEdges[i] >= mcEst && nCum[i] > 0);
+  let aGR = 0, bGR = 0;
+  if (fitIdx.length >= 2) {
+    const xs = fitIdx.map(i => binEdges[i]);
+    const ys = fitIdx.map(i => Math.log10(nCum[i]));
+    const n  = xs.length;
+    const sx = xs.reduce((a,b)=>a+b,0), sy = ys.reduce((a,b)=>a+b,0);
+    const sxx= xs.reduce((a,b)=>a+b*b,0), sxy= xs.reduce((a,v,k)=>a+v*ys[k],0);
+    bGR = -(n*sxy - sx*sy) / (n*sxx - sx*sx);
+    aGR = (sy + bGR*sx) / n;
+  }
+
+  // 回帰直線の点列
+  const fitLine = binEdges.filter((_,i) => binEdges[i] >= mcEst && nCum[i] > 0)
+    .map(m => ({ x: m, y: Math.pow(10, aGR - bGR * m) }));
+
+  // ── 局所 b 値（幅 0.5 の移動窓, 最大尤度法）──
+  const bLocal = binEdges.map((m, i) => {
+    const win = mags.filter(v => v >= m - 0.25 && v < m + 0.25);
+    if (win.length < 10) return null;
+    const mMean = win.reduce((a,b)=>a+b,0) / win.length;
+    const b = Math.log10(Math.E) / (mMean - (m - 0.25));
+    return b > 0 ? b : null;
+  });
+
+  // Chart.js用データ（null除去してscatter点に）
+  const nBinPts = binEdges.map((m,i) => nBin[i]  > 0 ? {x: m, y: nBin[i]}  : null).filter(Boolean);
+  const nCumPts = binEdges.map((m,i) => nCum[i]  > 0 ? {x: m, y: nCum[i]}  : null).filter(Boolean);
+  const bPts    = binEdges.map((m,i) => bLocal[i] !== null ? {x: m, y: bLocal[i]} : null).filter(Boolean);
+
+  const monoFont = { family: 'Share Tech Mono', size: 9 };
+  const label = `log N(M) = ${aGR.toFixed(3)} - ${bGR.toFixed(3)} M`;
+
   makeChart('chart-maghist', {
-    type: 'bar',
+    type: 'scatter',
     data: {
-      labels: labels.map(l => `M${l}`),
-      datasets: [{ data: values, backgroundColor: 'rgba(46,213,115,0.7)', borderWidth: 0 }]
+      datasets: [
+        {
+          label: 'N (累積)',
+          data: nCumPts,
+          pointStyle: 'circle',
+          pointRadius: 4,
+          pointBorderWidth: 1.5,
+          pointBackgroundColor: 'transparent',
+          pointBorderColor: '#ff6b9d',
+          showLine: false,
+          yAxisID: 'yLeft'
+        },
+        {
+          label: 'n (非累積)',
+          data: nBinPts,
+          pointStyle: 'triangle',
+          pointRadius: 5,
+          pointBorderWidth: 1.5,
+          pointBackgroundColor: 'transparent',
+          pointBorderColor: '#ffa502',
+          showLine: false,
+          yAxisID: 'yLeft'
+        },
+        {
+          label: 'G-R 回帰',
+          data: fitLine,
+          showLine: true,
+          pointRadius: 0,
+          borderColor: '#ff6b9d',
+          borderWidth: 1.5,
+          borderDash: [4, 3],
+          yAxisID: 'yLeft'
+        },
+        {
+          label: 'b 値',
+          data: bPts,
+          pointStyle: 'crossRot',
+          pointRadius: 5,
+          pointBorderWidth: 1.5,
+          pointBackgroundColor: 'transparent',
+          pointBorderColor: '#a8e063',
+          showLine: false,
+          yAxisID: 'yRight'
+        }
+      ]
     },
-    options: { ...chartDefaults, scales: {
-      x: { ticks: { color: '#4a6080', font: { family: 'Share Tech Mono', size: 10 } }, grid: { color: '#1a2540' } },
-      y: { title: { display: true, text: '件数', color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 } }, ticks: { color: '#4a6080', font: { family: 'Share Tech Mono', size: 10 } }, grid: { color: '#1a2540' } }
-    }}
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      color: '#c8d8f0',
+      plugins: {
+        legend: {
+          display: true,
+          labels: { color: '#c8d8f0', font: monoFont, boxWidth: 14, usePointStyle: true }
+        },
+        tooltip: {
+          backgroundColor: '#0d1420', borderColor: '#1a2540', borderWidth: 1,
+          titleColor: '#00d4ff', bodyColor: '#c8d8f0',
+          titleFont: monoFont, bodyFont: monoFont,
+          callbacks: {
+            title: () => label,
+            label: ctx => {
+              const ds = ctx.dataset.label;
+              if (ds === 'b 値') return `b = ${ctx.parsed.y.toFixed(3)}  M = ${ctx.parsed.x.toFixed(1)}`;
+              return `${ds}: ${ctx.parsed.y.toFixed(1)}  M = ${ctx.parsed.x.toFixed(1)}`;
+            }
+          }
+        },
+        annotation: {
+          annotations: {
+            mcLine: {
+              type: 'line', scaleID: 'x', value: mcEst,
+              borderColor: 'rgba(0,212,255,0.4)', borderWidth: 1, borderDash: [4,3],
+              label: { content: `Mc=${mcEst.toFixed(1)}`, display: true,
+                       color: '#00d4ff', font: monoFont, position: 'start' }
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Magnitude', color: '#4a6080', font: monoFont },
+          ticks: { color: '#4a6080', font: monoFont, stepSize: 0.5 },
+          grid: { color: '#1a2540' }
+        },
+        yLeft: {
+          type: 'logarithmic',
+          position: 'left',
+          title: { display: true, text: 'Frequency', color: '#4a6080', font: monoFont },
+          ticks: {
+            color: '#4a6080', font: monoFont,
+            callback: v => [1,2,5,10,20,50,100,200,500,1000,2000,5000,10000].includes(v) ? v : ''
+          },
+          grid: { color: '#1a2540' }
+        },
+        yRight: {
+          type: 'linear',
+          position: 'right',
+          title: { display: true, text: 'b value', color: '#a8e063', font: monoFont },
+          ticks: { color: '#a8e063', font: monoFont },
+          grid: { drawOnChartArea: false }
+        }
+      }
+    }
   });
+}
+
+/* ─────────────────────────────────────────────
+   CSV EXPORT
+───────────────────────────────────────────── */
+function exportCSV() {
+  if (!filteredData.length) { notify('出力するデータがありません', ''); return; }
+
+  const cols = ['date', 'epicenter', 'lat', 'long', 'dep', 'magnitude'];
+  const rows = [cols];
+
+  filteredData.forEach(e => {
+    rows.push([
+      e.dt.toLocaleString('ja-JP', { hour12: false }),
+      e.place  || '',
+      e.lat    != null ? e.lat.toFixed(4)  : '',
+      e.lon    != null ? e.lon.toFixed(4)  : '',
+      e.depth  != null ? e.depth           : '',
+      e.mag    != null ? e.mag.toFixed(1)  : ''
+    ]);
+  });
+
+  const escape = v => {
+    const s = String(v);
+    if (s.indexOf(',') >= 0 || s.indexOf('"') >= 0 || s.indexOf('\r') >= 0 || s.indexOf('\n') >= 0)
+      return '"' + s.split('"').join('""') + '"';
+    return s;
+  };
+  const csv = rows.map(r => r.map(escape).join(',')).join('\r\n');
+
+  const bom  = '\uFEFF';
+  const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+
+  const now  = new Date();
+  const pad  = n => String(n).padStart(2, '0');
+  const ts   = now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate())
+             + '_' + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
+  a.href     = url;
+  a.download = 'earthquake_' + ts + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  notify('CSV出力完了: ' + filteredData.length + ' 件', 'success');
 }
 
 /* ─────────────────────────────────────────────
@@ -798,6 +1331,334 @@ function notify(msg, type = '') {
   notifTimer = setTimeout(() => el.className = '', 3000);
 }
 
+
+
+
+/* =============================================================
+   TAB SWITCHING
+============================================================= */
+function switchTab(name) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.textContent.toLowerCase().includes(name === 'viz' ? '可視化' : 'etas')) {
+      b.classList.add('active');
+    }
+  });
+}
+
+/* =============================================================
+   ETAS JSON 読み込み
+============================================================= */
+document.getElementById('etas-json-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      renderEtasResults(data);
+    } catch(err) {
+      notify('JSONの解析に失敗しました: ' + err.message, 'error');
+    }
+  };
+  reader.readAsText(file);
+});
+
+/* =============================================================
+   ETAS 結果レンダリング
+============================================================= */
+const PARAM_LABELS = {
+  mu:    { sym: 'μ', desc: '背景レート' },
+  K:     { sym: 'K', desc: '余震生産性' },
+  alpha: { sym: 'α', desc: 'M依存性' },
+  c:     { sym: 'c', desc: '時定数(日)' },
+  p:     { sym: 'p', desc: 'p値' }
+};
+
+function renderEtasResults(d) {
+  document.getElementById('etas-upload-area').style.display = 'none';
+  document.getElementById('etas-results').style.display = 'block';
+
+  // ── メタ情報 ──
+  const meta = d.meta;
+  document.getElementById('etas-meta').innerHTML = [
+    ['ファイル', meta.csv],
+    ['開始時刻', meta.t0.slice(0,19)],
+    ['総イベント数', meta.n_total.toLocaleString()],
+    ['解析使用数 (≥Mc)', meta.n_used.toLocaleString()],
+    ['Mc', meta.Mc.toFixed(1)],
+    ['観測期間', meta.T.toFixed(1) + ' 日'],
+    ['生成日時', meta.generated.slice(0,19)]
+  ].map(([k,v]) => `<div><span style="color:var(--text-dim)">${k}: </span><span style="color:var(--accent)">${v}</span></div>`).join('');
+
+  // ── パラメータカード ──
+  const pg = document.getElementById('param-grid');
+  pg.innerHTML = Object.entries(d.params).map(([name, v]) => {
+    const lbl = PARAM_LABELS[name] || { sym: name, desc: '' };
+    const ciOk = !isNaN(v.ci_lower);
+    const ciStr = ciOk
+      ? `[${v.ci_lower.toFixed(4)}, ${v.ci_upper.toFixed(4)}]`
+      : '(CI計算不可)';
+    return `<div class="param-card">
+      <div class="param-name">${lbl.sym}</div>
+      <div class="param-value">${v.estimate.toFixed(4)}</div>
+      <div class="param-ci">${ciStr}</div>
+      <div style="font-size:0.62rem;color:var(--text-dim);margin-top:4px">${lbl.desc}</div>
+    </div>`;
+  }).join('');
+
+  // ── AIC比較 ──
+  const aic = d.aic;
+  const tbody = document.getElementById('aic-tbody');
+  tbody.innerHTML = [
+    ['ETAS', aic.etas.n_params, aic.etas.logL.toFixed(2), aic.etas.AIC.toFixed(2)],
+    ['定常ポアソン', aic.poisson.n_params, aic.poisson.logL.toFixed(2), aic.poisson.AIC.toFixed(2)]
+  ].map(([m,k,l,a]) => `<tr><td style="color:var(--accent)">${m}</td><td>${k}</td><td>${l}</td><td style="color:var(--accent3)">${a}</td></tr>`).join('');
+
+  const daic = aic.delta_aic;
+  let verdict, vcolor;
+  if (daic > 10) { verdict = `ΔAIC = ${daic.toFixed(1)} → ETASモデルが統計的に有意に優れています`; vcolor = '#2ed573'; }
+  else if (daic > 2) { verdict = `ΔAIC = ${daic.toFixed(1)} → ETASモデルがやや優れています`; vcolor = '#ffa502'; }
+  else { verdict = `ΔAIC = ${daic.toFixed(1)} → 両モデルに有意差なし`; vcolor = '#ff4757'; }
+  document.getElementById('aic-verdict').innerHTML = `<span style="color:${vcolor}">${verdict}</span>`;
+
+  // ── KS テスト ──
+  const res = d.residuals;
+  const ksOk = res.ks_pvalue > 0.05;
+  document.getElementById('ks-result').innerHTML = `
+    <div style="margin-bottom:8px">
+      KS統計量 D = <span style="color:var(--accent)">${res.ks_stat.toFixed(4)}</span>　
+      p値 = <span style="color:var(--accent)">${res.ks_pvalue.toFixed(4)}</span>
+    </div>
+    <span class="ks-badge" style="background:${ksOk?'#2ed573':'#ff4757'};color:${ksOk?'#000':'#fff'}">
+      ${ksOk ? '✓ モデル適合良好 (p > 0.05)' : '✗ 適合要確認 (p ≤ 0.05)'}
+    </span>`;
+
+  // KSグラフ（変換時間 vs 一様分布）
+  renderKsChart(res.tau_norm);
+
+  // ── λ(t) グラフ ──
+  renderLambdaChart(d.lambda, d.event_times, d.event_mags, d.meta.Mc);
+
+  // ── シミュレーション ──
+  renderSimChart(d.simulations, d.event_times, d.meta.T, d.meta.T_sim, d.meta.Mc);
+
+  // ── 空間パラメータ ──
+  if (d.spatial) {
+    document.getElementById('spatial-panel').style.display = 'block';
+    document.getElementById('spatial-content').innerHTML = `
+      <div style="display:flex;gap:32px">
+        <div><span style="color:var(--text-dim)">σ (空間広がり): </span><span style="color:var(--accent)">${d.spatial.sigma.estimate.toFixed(4)}°</span></div>
+        <div><span style="color:var(--text-dim)">γ (M依存空間): </span><span style="color:var(--accent)">${d.spatial.gamma.estimate.toFixed(4)}</span></div>
+        <div><span style="color:var(--text-dim)">空間log L: </span><span style="color:var(--accent)">${d.spatial.logL_spatial.toFixed(2)}</span></div>
+      </div>`;
+  }
+
+  notify('ETAS解析結果を読み込みました', 'success');
+}
+
+/* ── KS グラフ（実測 CDF vs 一様分布）── */
+function renderKsChart(tau_norm) {
+  const sorted = [...tau_norm].sort((a,b)=>a-b);
+  const n = sorted.length;
+  const empirical = sorted.map((v,i) => ({ x: v, y: (i+1)/n }));
+  const ideal     = [{ x:0, y:0 }, { x:1, y:1 }];
+  makeChart('chart-ks', {
+    type: 'scatter',
+    data: {
+      datasets: [
+        { label: '実測CDF', data: empirical, pointRadius: 1.5, pointBackgroundColor: '#00d4ff', showLine: true, borderColor: '#00d4ff', borderWidth: 1.5 },
+        { label: '理想(一様)', data: ideal, pointRadius: 0, showLine: true, borderColor: '#ffa502', borderWidth: 1.5, borderDash: [4,4] }
+      ]
+    },
+    options: {
+      ...chartDefaults,
+      plugins: { ...chartDefaults.plugins, legend: { display: true, labels: { color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 }, boxWidth: 20 } } },
+      scales: {
+        x: { title: { display: true, text: 'τ / N', color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 } }, ticks: { color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 } }, grid: { color: '#1a2540' } },
+        y: { title: { display: true, text: 'CDF', color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 } }, ticks: { color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 } }, grid: { color: '#1a2540' } }
+      }
+    }
+  });
+}
+
+/* ── λ(t) グラフ ── */
+function renderLambdaChart(lam, evTimes, evMags, mc) {
+  const monoFont = { family: 'Share Tech Mono', size: 9 };
+
+  // λ(t) の線データ
+  const lamData = lam.t.map((t, i) => ({ x: t, y: lam.vals[i] }));
+
+  // λ(t) の最小値（対数軸の下限として使用）
+  const lamMin = Math.max(1e-6, Math.min(...lam.vals.filter(v => v > 0)));
+
+  // イベントのx位置に対応するλ(t)補間値を取得
+  // → 対数軸でy=0は描けないのでλ(t)上の値にプロットし、縦線で下まで伸ばす
+  function interpolateLam(t) {
+    const ts = lam.t;
+    if (t <= ts[0]) return lam.vals[0];
+    if (t >= ts[ts.length-1]) return lam.vals[ts.length-1];
+    let lo = 0, hi = ts.length - 1;
+    while (hi - lo > 1) {
+      const mid = (lo + hi) >> 1;
+      if (ts[mid] <= t) lo = mid; else hi = mid;
+    }
+    const frac = (t - ts[lo]) / (ts[hi] - ts[lo]);
+    return lam.vals[lo] + frac * (lam.vals[hi] - lam.vals[lo]);
+  }
+
+  // イベントをマグニチュードで色分け
+  const evFiltered = evTimes
+    .map((t, i) => ({ t, mag: evMags[i] }))
+    .filter(d => d.mag >= mc);
+
+  const magColor = m =>
+    m >= 6.0 ? 'rgba(255,71,87,0.9)'
+  : m >= 5.0 ? 'rgba(255,99,72,0.9)'
+  : m >= 4.0 ? 'rgba(255,165,2,0.85)'
+  : m >= 3.0 ? 'rgba(0,212,255,0.7)'
+  :            'rgba(0,212,255,0.4)';
+
+  // イベント縦線プラグイン（対数軸の最下限からλ(t)まで描画）
+  const evLinePlugin = {
+    id: 'evLines_lambda',
+    afterDatasetsDraw(chart) {
+      const { ctx, scales: { x, y }, chartArea } = chart;
+      const yBottom = chartArea.bottom;
+      ctx.save();
+      ctx.lineWidth = 1;
+      evFiltered.forEach(ev => {
+        const xPx = x.getPixelForValue(ev.t);
+        const lamY = interpolateLam(ev.t);
+        const yPx  = y.getPixelForValue(Math.max(lamY, lamMin));
+        ctx.strokeStyle = magColor(ev.mag);
+        ctx.beginPath();
+        ctx.moveTo(xPx, yBottom);
+        ctx.lineTo(xPx, yPx);
+        ctx.stroke();
+      });
+      ctx.restore();
+    }
+  };
+
+  makeChart('chart-lambda', {
+    type: 'scatter',
+    plugins: [evLinePlugin],
+    data: {
+      datasets: [
+        {
+          label: 'λ(t)',
+          data: lamData,
+          showLine: true,
+          borderColor: '#00d4ff',
+          borderWidth: 2,
+          pointRadius: 0,
+          fill: false,
+          order: 1
+        },
+        // 凡例用ダミーデータ（実描画はプラグイン）
+        {
+          label: 'イベント (M≥' + mc.toFixed(1) + ')',
+          data: [],
+          pointRadius: 4,
+          pointBackgroundColor: 'rgba(0,212,255,0.6)',
+          pointBorderWidth: 0,
+          showLine: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, labels: { color: '#4a6080', font: monoFont, boxWidth: 14, usePointStyle: true } },
+        tooltip: {
+          backgroundColor: '#0d1420', borderColor: '#1a2540', borderWidth: 1,
+          titleColor: '#00d4ff', bodyColor: '#c8d8f0',
+          titleFont: monoFont, bodyFont: monoFont,
+          filter: item => item.datasetIndex === 0,
+          callbacks: {
+            label: ctx => 'λ = ' + ctx.parsed.y.toFixed(4) + '  t = ' + ctx.parsed.x.toFixed(2) + '日'
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          min: 0,
+          title: { display: true, text: '経過日数', color: '#4a6080', font: monoFont },
+          ticks: { color: '#4a6080', font: monoFont },
+          grid: { color: '#1a2540' }
+        },
+        y: {
+          type: 'logarithmic',
+          title: { display: true, text: 'λ(t)  [events/day]', color: '#4a6080', font: monoFont },
+          ticks: {
+            color: '#4a6080', font: monoFont,
+            callback: v => [0.001,0.01,0.1,1,2,5,10,20,50,100,200,500,1000,5000].includes(v) ? v : ''
+          },
+          grid: { color: '#1a2540' }
+        }
+      }
+    }
+  });
+}
+
+/* ── シミュレーショングラフ ── */
+function renderSimChart(sims, obsTimes, T_obs, T_sim, mc) {
+  const colors = ['#ff4757','#ff6348','#ffa502','#a55eea','#2ed573'];
+  const datasets = sims.map((s, idx) => ({
+    label: `シミュ${idx+1} (${s.n}件)`,
+    data: s.times.map(t => ({ x: t, y: idx + 1 })),
+    pointRadius: 4,
+    pointBackgroundColor: colors[idx % colors.length],
+    pointBorderWidth: 0,
+    showLine: false
+  }));
+
+  // 観測データ
+  datasets.unshift({
+    label: `観測 (${obsTimes.length}件)`,
+    data: obsTimes.map(t => ({ x: t, y: 0 })),
+    pointRadius: 3,
+    pointBackgroundColor: '#00d4ff',
+    pointBorderWidth: 0,
+    showLine: false
+  });
+
+  // 境界線
+  datasets.push({
+    label: '予測開始',
+    data: [{ x: T_obs, y: -0.5 }, { x: T_obs, y: sims.length + 0.5 }],
+    showLine: true,
+    borderColor: '#ffffff44',
+    borderWidth: 1,
+    borderDash: [6, 3],
+    pointRadius: 0
+  });
+
+  const n_vals = sims.map(s => s.n);
+  const avg_n  = (n_vals.reduce((a,b)=>a+b,0)/n_vals.length).toFixed(1);
+  const min_n  = Math.min(...n_vals);
+  const max_n  = Math.max(...n_vals);
+  document.getElementById('sim-summary').innerHTML =
+    `予測期間 ${T_sim.toFixed(0)} 日間　平均: <span style="color:var(--accent)">${avg_n} 件</span>　範囲: ${min_n}〜${max_n} 件（5回試行）`;
+
+  makeChart('chart-sim', {
+    type: 'scatter',
+    data: { datasets },
+    options: {
+      ...chartDefaults,
+      plugins: { ...chartDefaults.plugins, legend: { display: true, labels: { color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 }, boxWidth: 14 } } },
+      scales: {
+        x: { title: { display: true, text: '経過日数', color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 } }, ticks: { color: '#4a6080', font: { family: 'Share Tech Mono', size: 9 } }, grid: { color: '#1a2540' } },
+        y: { ticks: { display: false }, grid: { display: false } }
+      }
+    }
+  });
+}
 
 </script>
 </body>
