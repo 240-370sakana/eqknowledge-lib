@@ -1,0 +1,2 @@
+# eqknowlede-lib
+ホームページ
