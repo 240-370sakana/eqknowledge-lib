@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>マグニチュードランキング(2025.11.11更新)</title>
+        <meta name="description" content="過去、現在、未来の地震を情報でつなぐ">
+    <!-- ファビコン -->
+        <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- リセットCSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <!-- Googleフォント -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
+    <!-- CSS -->
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    
+    <body>
+        <div class="page-header">
+            <a href="index.html">地震活動解析webアプリ(名称未定)</a>
+        </div>
+        
+        <div class="title">
+            <h1 class="page-title">マグニチュードランキング 2026年版</h1>
+        </div>
+        
+        <div class="magrank">
+            <h2>過去年のランキング</h2>
+            <a href="magnitude-ranking2025.html">2025年</a>
+        </div>
+
+        <div class="jp65 magrank">
+            <h2>日本付近で発生したMj>=6.5の地震</h2>
+            <p>出典：気象庁 震度データベース検索</p>
+            <p>発生日は日本時間(JST)</p>
+            <p>地震の規模は気象庁マグニチュードMj</p>
+            <table border="1">
+                <tr>
+                    <th>順位</th>
+                    <th>震央地名</th>
+                    <th>発生日(JST)</th>
+                    <th>規模(Mj)</th>
+                    <th>最大震度</th>
+                    <th>津波</th>
+                </tr>
+                <tr>
+                    <td class="rank">1</td>
+                    <td class="epicenter"></td>
+                    <td class="date">月日</td>
+                    <td class="mag"></td>
+                    <td class="shindo2">震度</td>
+                    <td class="tsunami"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="wl70 magrank">
+            <h2>世界で発生したM>=7.0の地震</h2>
+            <p>出典：USGS</p>
+            <p>発生日は日本時間(UTC+09)</p>
+            <p>(地震の規模は基本的にモーメントマグニチュードMw)</p>
+            <table border="1">
+                <tr>
+                    <th>順位</th>
+                    <th>震央地名</th>
+                    <th>発生日(UTC+09)</th>
+                    <th>規模(M)</th>
+                    <th>津波</th>
+                </tr>
+                <tr>
+                    <td class="rank">1</td>
+                    <td class="epicenter">マレーシア</td>
+                    <td class="date">2月23日</td>
+                    <td class="mag">7.1</td>
+                    <td class="tsunami">なし</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="jp5 magrank">
+            <h2>日本付近で発生した最大震度>=5弱の地震</h2>
+            <p>出典：気象庁 震度データベース検索</p>
+            <p>発生日は日本時間(JST)</p>
+            <p>地震の規模は気象庁マグニチュードMj</p>
+            <table border="1">
+                <tr>
+                    <th>番号</th>
+                    <th>震央地名</th>
+                    <th>発生日(JST)</th>
+                    <th>規模(Mj)</th>
+                    <th>最大震度</th>
+                </tr>
+                <tr>
+                    <td class="rank">1</td>
+                    <td class="epicenter">トカラ列島近海</td>
+                    <td class="date">1月6日</td>
+                    <td class="mag">6.4</td>
+                    <td class="shindo5h">震度5強</td>
+                </tr>
+                <tr>
+                    <td class="rank">2</td>
+                    <td class="epicenter">島根県東部</td>
+                    <td class="date">1月6日</td>
+                    <td class="mag">5.1</td>
+                    <td class="shindo5l">震度5弱</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="hanrei magrank">
+            <h2>震度 凡例</h2>
+            <table border="1">
+                <tr>
+                    <th>震度</th>
+                </tr>
+                <tr>
+                    <td class="shindo1">震度1</td>
+                </tr>
+                <tr>
+                    <td class="shindo2">震度2</td>
+                </tr>
+                <tr>
+                    <td class="shindo3">震度3</td>
+                </tr>
+                <tr>
+                    <td class="shindo4">震度4</td>
+                </tr>
+                <tr>
+                    <td class="shindo5l">震度5弱</td>
+                </tr>
+                <tr>
+                    <td class="shindo5h">震度5強</td>
+                </tr>
+                <tr>
+                    <td class="shindo6l">震度6弱</td>
+                </tr>
+                <tr>
+                    <td class="shindo6h">震度6強</td>
+                </tr>
+                <tr>
+                    <td class="shindo7">震度7</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="hanrei magrank">
+            <h2>津波高さ 凡例</h2>
+            <table border="1">
+                <tr>
+                    <td class="tsunami">なし</td>
+                    <td>観測されなかった</td>
+                </tr>
+                <tr>
+                    <td class="tsunami"> - </td>
+                    <td>その地震が発生する前により大きな津波が発生しているなど、その地震による津波のみを観測できる状況でなかった</td>
+                </tr>
+                <tr>
+                    <td class="tsunami">微弱</td>
+                    <td>最大0.2m未満</td>
+                </tr>
+                <tr>
+                    <td class="tsunami">小</td>
+                    <td>最大0.2m~1.0m</td>
+                </tr>
+                <tr>
+                    <td class="tsunami">中</td>
+                    <td>最大1.0m~3.0m</td>
+                </tr>
+                <tr>
+                    <td class="tsunami">大</td>
+                    <td>最大3.0m~5.0m</td>
+                </tr>
+                    <td class="tsunami">巨大</td>
+                    <td>最大5.0m~10.0m</td>
+                </tr>
+                <tr>
+                    <td class="tsunami">超巨大</td>
+                    <td>最大10.0m以上</td>
+                </tr>
+                    <td class="tsunami">あり</td>
+                    <td>波高が不明の津波</td>
+                </tr>
+            </table>
+        </div>
+
+        <footer class="footer">
+            <div class="copyright">
+                <small>Copyright ©240aloe</small>
+            </div>
+        </footer>
+    </body>
+</html>

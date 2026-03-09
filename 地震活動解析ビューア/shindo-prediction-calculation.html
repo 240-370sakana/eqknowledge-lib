@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>震度予測計算</title>
+        <meta name="description" content="過去、現在、未来の地震を情報でつなぐ">
+    <!-- ファビコン -->
+        <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- リセットCSS -->
+        <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <!-- Googleフォント -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
+    <!-- CSS -->
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <div class="page-header">
+            <a href="index.html">地震活動解析webアプリ(名称未定)</a>
+        </div>
+
+        <div class="title">
+            <h1 class="page-title">震度予測計算</h1>
+        </div>
+
+        <div class="calcint">
+            <form method="post">
+                <table border="1">
+                    <tr>
+                        <th>Mjma</th>
+                        <td><input type="text" size="10" name="Mjma" value="5.0"></td>
+                    </tr>
+                    <tr>
+                        <th>深さ[km]</th>
+                        <td><input type="text" size="10" name="depth" value="10"></td>
+                    </tr>
+                    <tr>
+                        <th>震源距離[km]</th>
+                        <td><input type="text" size="10" name="Distance" value="10"></td>
+                    </tr>
+                    <tr>
+                        <th>地盤増幅率</th>
+                        <td><input type="text" size="10" name="arv" value="1.2"></td>
+                    </tr>
+                </table>
+                <input type="button" value="CALC" onclick="calc(this.form)">
+                <br>
+                計算結果 : 予想震度<input type="text" size="10" name="z">
+            </form>
+        </div>
+
+        <!--Javascript-->
+        <script src="js/shindo-calculater.js"></script>
+
+        <footer class="footer">
+            <p>連絡先 240.370sakana@gmail.com</p>
+            <small>Copyright ©240aloe</small>
+        </footer>
+    </body>
+</html>
