@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+/* 基本配色 */
+
+
+/* 共通部分
+------------------------------- */
+html {
+    font-size: 100%;
+}
+body{
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "BIZ UDPGothic", sans-serif;
+    line-height: 1.7;
+    color: #ccc;
+    background-color: #00060B;
+}
+a {
+    text-decoration: none;
+}
+a {
+    color: #ccc;
+}
+a:visited {
+    color: #ccc;
+}
+a:hover {
+    color: #555;
+}
+img {
+    max-width: 100%;
+}
+h2 {
+    font-size: 1.5rem;
+}
+
+/* レイアウト */
+.wrapper {
+    margin: auto;
+    padding: 2.5% 10%;
+}
+.align-center {
+    text-align: center;
+}
+
+/* 見出し */
+.page-title {
+    color: #bbb;
+    text-align: center;
+    padding: 75px;
+}
+.page-header {
+    padding-top: .5rem;
+    background-color: #083168;
+}
+/* ボタン */
+.btn {
+    display: inline-block;
+    font-size: 1.5rem;
+    background-color: rgb(31, 125, 173);
+    color: #fff;
+    border-radius: 8px;
+    padding: .75rem 1.5rem;
+    transition: .5s;
+}
+.btn:hover {
+    background-color: #999;
+}
+
+/* ヘッダー */
+.page-header {
+    vertical-align: middle;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+/* フッター */
+.footer {
+    background-size: cover;
+    background-position: center;
+    background-color: #555;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 6rem;
+    color: #fff;
+}
+
+/* HOME
+------------------------------- */
+.title {
+    background-color: #555;
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem;
+}
+.purpose {
+    text-align: center;
+    margin: 3rem auto 0;
+}
+.home {
+    margin: 3rem auto 3rem 10%;
+}
+
+
+/* Magnitude Ranking
+------------------------------- */
+.magrank {
+    margin: 3rem auto 3rem 10%;
+}
+/* テーブル */
+.rank {
+    text-align: center;
+}
+.epicenter{
+    padding-left: .5rem;
+    padding-right: 1.5rem;
+    text-align: left;
+}
+.date {
+    padding-right: .5rem;
+    text-align: right;
+    padding-left: 1.5rem;
+}
+.mag {
+    padding: 0 .5rem;
+    text-align: center;
+}
+.tsunami {
+    padding: 0 .5rem;
+    text-align: center;
+}
+th {
+    padding: 0 .5rem;
+}
+
+/* 震度配色 */
+td.shindo1 {
+    color: black;
+    text-align: center;
+    background-color: #f2f2ff;
+}
+td.shindo2 {
+    text-align: center;
+    color: black;
+    background-color: #00aaff;
+}
+td.shindo3 {
+    text-align: center;
+    color: white;
+    background-color: #0041ff;
+}
+td.shindo4 {
+    text-align: center;
+    color: black;
+    background-color: #ffe696;
+}
+td.shindo5l {
+    text-align: center;
+    color: black;
+    background-color: #ffe600;
+}
+td.shindo5h {
+    text-align: center;
+    color: black;
+    background-color: #ff9900;
+}
+td.shindo6l {
+    text-align: center;
+    color: white;
+    background-color: #ff2800;
+}
+td.shindo6h {
+    text-align: center;
+    color: white;
+    background-color: #a50021;
+}
+td.shindo7 {
+    text-align: center;
+    color: white;
+    background-color: #b40068;
+}
+
+/* 震度予測計算
+------------------------------- */
+.calcint {
+    margin: 3rem auto 3rem 10%;
+}
+input {
+    color: #ccc;
+    background-color: #555;
+}
