@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEISMIC/VIZ - QuakeView</title>
+<title>地震データ可視化ダッシュボード</title>
 
 <!-- Leaflet -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
@@ -57,13 +57,54 @@
     width: 100%; box-sizing: border-box; max-width: 100%;
   }
   .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .logo-link {
     font-family: var(--mono);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 4px 10px;
+    border: 1px solid rgba(0,212,255,0.35);
+    border-radius: 3px;
+    background: rgba(0,212,255,0.06);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,212,255,0.10) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .logo-link:hover { border-color: var(--accent); color: #fff; }
+  .logo-link:hover::before { opacity: 1; }
+  .logo-link .q { color: var(--accent); }
+  .logo-link .uake { color: var(--text); }
+  .logo-link .v { color: var(--accent3); }
+  .logo-link .iew { color: var(--text-dim); }
+  .logo-sep {
+    color: var(--border);
+    font-family: var(--mono);
+    font-size: 1rem;
+    user-select: none;
+  }
+  .logo-sub {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
     letter-spacing: 3px;
     text-transform: uppercase;
   }
-  .logo span { color: var(--text-dim); }
+  .logo-sub span { color: rgba(0,212,255,0.5); }
   #stats-bar {
     display: flex; gap: 28px; align-items: center;
     font-family: var(--mono); font-size: 0.78rem;
@@ -447,7 +488,11 @@
 
 <!-- ── Header ── -->
 <header>
-  <div class="logo">SEISMIC<span>/</span>VIZ</div>
+  <div class="logo">
+    <a class="logo-link" href="index.html"><span class="q">Q</span><span class="uake">uake</span><span class="v">V</span><span class="iew">iew</span></a>
+    <span class="logo-sep">|</span>
+    <span class="logo-sub">SEISMIC<span>/</span>VIZ</span>
+  </div>
   <div id="stats-bar">
     <div class="stat"><span class="stat-label">DATE RANGE</span><span class="stat-value stat-value--sm" id="h-range">—</span></div>
     <div class="stat"><span class="stat-label">MAX MAG</span><span class="stat-value" id="h-maxmag">—</span></div>

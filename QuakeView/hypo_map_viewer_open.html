@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>気象庁 速報値震源ビューア - QuakeView</title>
+<title>気象庁 震源速報ビューア（無感含む）</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -234,7 +234,38 @@
     #table-pane { width:100%; border-left:none; border-top:1px solid var(--border); }
   }
 
-  /* popup content */
+  .nav-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    text-decoration: none;
+    margin-bottom: 6px;
+  }
+  .nav-logo-icon {
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--teal) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0,212,255,.3);
+  }
+  .nav-logo-text {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cyan);
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 12px rgba(0,212,255,.4);
+    transition: color .2s;
+  }
+  .nav-logo:hover .nav-logo-text { color: #fff; }
+  .header-divider {
+    width: 1px; height: 28px;
+    background: var(--border2);
+    margin: 0 14px 6px;
+    flex-shrink: 0;
+    align-self: flex-end;
+  }
   .popup-time  { font-family:var(--mono); font-size:10px; color:var(--text-dim); margin-bottom:4px; }
   .popup-place { font-size:14px; font-weight:500; margin-bottom:6px; }
   .popup-row   { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:4px; }
@@ -245,9 +276,16 @@
 <div id="app">
 
   <header>
-    <div>
-      <div class="logo-tag">Japan Meteorological Agency · bosai/hypo GeoJSON</div>
-      <h1>震源速報ビューア <small>無感地震含む</small></h1>
+    <div style="display:flex;align-items:flex-end;gap:0">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-icon">🌐</span>
+        <span class="nav-logo-text">QuakeView</span>
+      </a>
+      <span class="header-divider"></span>
+      <div>
+        <div class="logo-tag">Japan Meteorological Agency · bosai/hypo GeoJSON</div>
+        <h1>震源速報ビューア <small>無感地震含む</small></h1>
+      </div>
     </div>
     <div class="header-right">
       <div id="clock">---</div>
@@ -264,15 +302,15 @@
     </div>
     <div class="ctrl-group" style="margin-left:8px">
       <span class="ctrl-label">M</span>
-      <input type="number" id="mag-min" value="0.0" min="-9.9" max="9.9" step="0.1" style="width:52px">
+      <input type="number" id="mag-min" value="-9.9" min="-9.9" max="9.9" step="0.1" style="width:52px">
       <span class="ctrl-label">〜</span>
       <input type="number" id="mag-max" value="9.9"  min="-9.9" max="9.9" step="0.1" style="width:52px">
     </div>
     <div class="ctrl-group">
       <span class="ctrl-label">深さ</span>
-      <input type="number" id="dep-min" value="0"   min="0" max="999" step="1" style="width:52px">
+      <input type="number" id="dep-min" value="0"   min="0" max="1000" step="1" style="width:52px">
       <span class="ctrl-label">〜</span>
-      <input type="number" id="dep-max" value="999" min="0" max="999" step="1" style="width:52px">
+      <input type="number" id="dep-max" value="1000" min="0" max="1000" step="1" style="width:52px">
       <span class="ctrl-label">km</span>
     </div>
     <div class="ctrl-group">
